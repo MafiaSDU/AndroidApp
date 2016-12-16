@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     Button start,go_to_rooms;
     ProgressBar pb;
     SharedPreferences spf;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         user.put("name", ed_name.getText().toString());
         connection.Connect("api/user/add",user);
         pb.setVisibility(View.VISIBLE);
+        editor = spf.edit();
+        editor.putString("name",ed_name.getText().toString());
         ed_name.setText("");
         start.setEnabled(false);
         go_to_rooms.setVisibility(View.VISIBLE);
@@ -58,12 +61,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.d("Log","Destroyed");
         HashMap<String,String> id = new HashMap<>();
         id.put("id",spf.getString("id",null));
-        SharedPreferences.Editor editor = spf.edit();
+        editor = spf.edit();
+        Log.d("Log","id"+spf.getString("id",null));
         editor.remove("id");
+        editor.remove("name");
         editor.commit();
+        Log.d("Log","id"+spf.getString("id",null));
         connection.Connect("api/user/delete",id);
+
     }
 
 

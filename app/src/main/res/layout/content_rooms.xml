@@ -24,32 +24,53 @@
         android:hint="@string/room_name_hint"
         android:layout_below="@id/creator_name"
         />
-    <Spinner
-        android:layout_width="wrap_content"
+
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
         android:id="@+id/mafia"
+        android:hint="@string/enter_mafia"
         android:layout_below="@+id/room_name"
         android:layout_alignParentStart="true" />
 
-    <Spinner
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/doctors"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/sheriff"
+        android:hint="@string/enter_sheriff"
         android:layout_below="@+id/mafia"
         android:layout_alignParentStart="true" />
-    <Spinner
-        android:layout_width="wrap_content"
+
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:hint="@string/enter_doctor"
+        android:id="@+id/doctors"
+        android:layout_below="@+id/sheriff"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
         android:id="@+id/citizens"
         android:layout_below="@+id/doctors"
+        android:hint="@string/enter_citizens"
         android:layout_alignParentStart="true" />
-    <Spinner
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/sheriff"
-        android:layout_below="@+id/citizens"
-        android:layout_alignParentStart="true" />
-
-
+        android:id="@+id/room_add"
+        android:layout_below="@id/citizens"
+        android:text="Create Lobby"
+        android:onClick="create_room"
+        />
 
 </RelativeLayout>

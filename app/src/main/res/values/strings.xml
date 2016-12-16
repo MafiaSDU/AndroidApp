@@ -4,4 +4,8 @@
     <string name="button_start">Start</string>
     <string name="title_activity_rooms">RoomsActivity</string>
     <string name="room_name_hint">Enter room name</string>
+    <string name="enter_doctor">Enter Doctor number</string>
+    <string name="enter_mafia">Enter Mafia number</string>
+    <string name="enter_sheriff">Enter Sheriff number</string>
+    <string name="enter_citizens">Enter Citizens number</string>
 </resources>

@@ -64,6 +64,19 @@ public class ConnectionToServer {
                                 e.printStackTrace();
                             }
                         }
+                        if(urlPath=="api/room/add"){
+
+//                            try {
+//                                JSONObject json = new JSONObject(response);
+                                Log.d("MyLogs",response);
+//                                SharedPreferences.Editor editor = spf.edit();
+//                                editor.putString("rooid",json.getString("_id"));
+//                                editor.commit();
+//
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+                        }
 
                     }
                 },
