@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Mafia</string>
+    <string name="ed_name">Name</string>
+    <string name="button_start">Start</string>
+    <string name="title_activity_rooms">RoomsActivity</string>
+    <string name="room_name_hint">Enter room name</string>
+</resources>
