@@ -26,15 +26,16 @@ import java.util.Map;
  */
 
 public class ConnectionToServer {
-    String url ="https://rauan-android-backend.herokuapp.com";
+    String url ="https://rauan-android-backend.herokuapp.com/";
     Context context;
     String response = "";
     String resp,id;
     SharedPreferences spf ;
     private RequestQueue mRequestQueue;
     private DiskBasedCache mCache;
-    ConnectionToServer(Context context){
+    ConnectionToServer(Context context,SharedPreferences spf){
         this.context = context;
+        this.spf = spf;
     }
     public void Connect(final String urlPath, final HashMap<String, String> params) {
 
