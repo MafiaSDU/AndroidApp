@@ -27,7 +27,6 @@ public class VolleySingleton {
             mRequestQueue = Volley.newRequestQueue(context);
             
         }
-        Log.d("MyLogs", mRequestQueue.toString());
         return mRequestQueue;
     }
 }

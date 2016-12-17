@@ -44,7 +44,6 @@ public class ConnectionToServer {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d("MyLogs", "Response is: "+ response);
                         resp = response;
                         if(urlPath.equals("api/user/add")){
                             try {

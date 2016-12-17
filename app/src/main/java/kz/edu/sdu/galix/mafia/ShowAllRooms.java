@@ -63,21 +63,6 @@ public class ShowAllRooms extends AppCompatActivity {
                 TextView v = (TextView) view.findViewById(R.id.roomName);
                 count++;
                 Log.d("MyLogs", v.getHint().toString());
-
-//                Intent intent = new Intent(ShowAllRooms.this, Chat.class);
-//                startActivity(intent);
-//                data.get(0).put("number", count + " / 10");
-//                data.removeAll(data);
-//                HashMap<String, String> map;
-//                for(int i = 0; i < 10; i++) {
-//                    map = new HashMap<>();
-//                    map.put("roomName", "Room2 " + (i + 1));
-//                    map.put("creatorName", "Creator Name2  " + (i + 1));
-//                    map.put("number", (i + 1) + " / 20");
-//                    data.add(map);
-//                }
-//
-//                adapter.notifyDataSetChanged();
             }
         });
     }
@@ -100,8 +85,11 @@ public class ShowAllRooms extends AppCompatActivity {
         protected void onPostExecute(String allRooms) {
             try {
                 JSONArray rooms = new JSONArray(allRooms);
+                Log.d("MyLogs", "Response is: "+ rooms.length() + " --- " +  allRooms);
+                Log.d("MyLogs", "--------------------------------------------------");
                 for(int i = 0; i < rooms.length(); i++) {
                     JSONObject room = new JSONObject("" + rooms.get(i));
+                    Log.d("MyLogs", "room ---" + room.toString());
                     JSONObject creator = new JSONObject("" + room.get("creator"));
                     Log.d("MyLogs", "Room -  " + room.get("name") + " - " + creator.get("name") + " - " +  room.get("count") + " / " +  room.get("number"));
                     HashMap<String, String> map;
