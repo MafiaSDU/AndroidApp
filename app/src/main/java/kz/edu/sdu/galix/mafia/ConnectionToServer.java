@@ -31,6 +31,7 @@ public class ConnectionToServer {
     private DiskBasedCache mCache;
     ConnectionToServer(Context context, SharedPreferences spf){
         this.context = context;
+        this.spf = spf;
     }
     public void Connect(final String urlPath, final HashMap<String, String> params, int method) {
 
@@ -57,6 +58,20 @@ public class ConnectionToServer {
                                 e.printStackTrace();
                             }
                         }
+                        if(urlPath=="api/room/add"){
+
+//                            try {
+//                                JSONObject json = new JSONObject(response);
+                                Log.d("MyLogs",response);
+//                                SharedPreferences.Editor editor = spf.edit();
+//                                editor.putString("rooid",json.getString("_id"));
+//                                editor.commit();
+//
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+                        }
+
                     }
                 },
                 new Response.ErrorListener(){
