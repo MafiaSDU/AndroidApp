@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         go_to_rooms.setVisibility(View.INVISIBLE);
         ed_name = (EditText)findViewById(R.id.name);
         pb = (ProgressBar)findViewById(R.id.pb1);
-        spf = getSharedPreferences("id",MODE_PRIVATE);
+        spf = getSharedPreferences("data",MODE_PRIVATE);
         connection = new ConnectionToServer(this, spf);
 
         Intent i = new Intent(MainActivity.this,ShowAllRooms.class);

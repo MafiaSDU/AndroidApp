@@ -37,7 +37,7 @@ public class RoomsActivity extends AppCompatActivity {
         doctors = (EditText) findViewById(R.id.doctors);
         sheriff = (EditText) findViewById(R.id.sheriff);
         room_name = (EditText)findViewById(R.id.room_name);
-        spf = getSharedPreferences("id",MODE_PRIVATE);
+        spf = getSharedPreferences("data",MODE_PRIVATE);
         user_name = (TextView)findViewById(R.id.creator_name);
         user_name.setText(spf.getString("name",null));
         connect = new ConnectionToServer(this,spf);
@@ -49,6 +49,7 @@ public class RoomsActivity extends AppCompatActivity {
         room.put("doctor",doctors.getText().toString());
         room.put("citizen",citizens.getText().toString());
         room.put("name",room_name.getText().toString());
+        room.put("creator",spf.getString("id",null));
         connect.Connect("api/room/add",room, Request.Method.POST);
     }
     public void createList(){

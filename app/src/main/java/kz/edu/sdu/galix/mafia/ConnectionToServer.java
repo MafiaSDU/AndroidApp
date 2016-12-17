@@ -59,16 +59,15 @@ public class ConnectionToServer {
                         }
                         if(urlPath=="api/room/add"){
 
-//                            try {
-//                                JSONObject json = new JSONObject(response);
+                            try {
+                                JSONObject json = new JSONObject(response);
                                 Log.d("MyLogs",response);
-//                                SharedPreferences.Editor editor = spf.edit();
-//                                editor.putString("rooid",json.getString("_id"));
-//                                editor.commit();
-//
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
+                                SharedPreferences.Editor editor = spf.edit();
+                                editor.putString("room_id",json.getString("_id"));
+                                editor.commit();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
 
                     }
