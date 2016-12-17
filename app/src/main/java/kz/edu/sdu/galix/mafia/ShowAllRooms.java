@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -25,6 +26,7 @@ public class ShowAllRooms extends AppCompatActivity {
     TextView tv;
     ListView listView;
     ArrayList<HashMap<String, String>> data;
+    ProgressBar progressBarShowAllRooms;
     MySimpleAdapter adapter;
     ConnectionToServer connection;
     SharedPreferences spf;
@@ -36,7 +38,7 @@ public class ShowAllRooms extends AppCompatActivity {
 
         connection = new ConnectionToServer(this, spf);
         tv = (TextView) findViewById(R.id.tv);
-
+        progressBarShowAllRooms = (ProgressBar) findViewById(R.id.progressBarShowAllRooms);
         listView = (ListView)findViewById(R.id.listView);
         data = new ArrayList<>();
 //                HashMap<String, String> map;
@@ -104,6 +106,7 @@ public class ShowAllRooms extends AppCompatActivity {
                     data.add(map);
                     adapter.notifyDataSetChanged();
                 }
+                progressBarShowAllRooms.setVisibility(View.GONE);
                 Log.d("MyLogs", "Dsdsa");
             } catch (JSONException e) {
                 e.printStackTrace();
