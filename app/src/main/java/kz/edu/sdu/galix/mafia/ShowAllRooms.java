@@ -35,21 +35,28 @@ public class ShowAllRooms extends AppCompatActivity {
         setContentView(R.layout.activity_show_all_rooms);
 
         connection = new ConnectionToServer(this, spf);
-        new MyTask().execute();
         tv = (TextView) findViewById(R.id.tv);
 
         listView = (ListView)findViewById(R.id.listView);
         data = new ArrayList<>();
-
+//                HashMap<String, String> map;
+//                for(int i = 0; i < 10; i++) {
+//                    map = new HashMap<>();
+//                    map.put("roomName", "Room2` " + (i + 1));
+//                    map.put("creatorName", "Creator Name2  " + (i + 1));
+//                    map.put("number", (i + 1) + " / 20");
+//                    data.add(map);
+//                }
         adapter = new MySimpleAdapter(
-                this,
-                data,
-                R.layout.item,
-                new String[]{"roomName", "creatorName", "number"},
-                new int[]{R.id.roomName, R.id.creatorName, R.id.number}
+            this,
+            data,
+            R.layout.item,
+            new String[]{"roomName", "creatorName", "number"},
+            new int[]{R.id.roomName, R.id.creatorName, R.id.number}
         );
         listView.setAdapter(adapter);
 
+        new MyTask().execute();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -103,8 +110,9 @@ public class ShowAllRooms extends AppCompatActivity {
                     map.put("creatorName", creator.get("name").toString());
                     map.put("number", room.get("count") + " / " + room.get("number"));
                     data.add(map);
+                    adapter.notifyDataSetChanged();
                 }
-                adapter.notifyDataSetChanged();
+                Log.d("MyLogs", "Dsdsa");
             } catch (JSONException e) {
                 e.printStackTrace();
             }

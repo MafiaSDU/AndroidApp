@@ -1,5 +1,6 @@
 package kz.edu.sdu.galix.mafia;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -25,11 +26,11 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     String url ="https://rauan-android-backend.herokuapp.com/";
     EditText ed_name;
     ConnectionToServer connection;
-    Button start,go_to_rooms;
+    Button start,go_to_rooms, btn_all_rooms;
     ProgressBar pb;
     SharedPreferences spf;
     SharedPreferences.Editor editor;
@@ -38,15 +39,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         start = (Button)findViewById(R.id.btn_add);
+        btn_all_rooms = (Button) findViewById(R.id.btn_all_rooms);
+        btn_all_rooms.setOnClickListener(this);
+
         go_to_rooms = (Button)findViewById(R.id.btn_go_to_rooms);
         go_to_rooms.setVisibility(View.INVISIBLE);
         ed_name = (EditText)findViewById(R.id.name);
         pb = (ProgressBar)findViewById(R.id.pb1);
         spf = getSharedPreferences("id",MODE_PRIVATE);
         connection = new ConnectionToServer(this, spf);
+
         Intent i = new Intent(MainActivity.this,ShowAllRooms.class);
         startActivity(i);
-        connection = new ConnectionToServer(this,spf);
     }
 
 
@@ -78,5 +82,15 @@ public class MainActivity extends AppCompatActivity {
         connection.Connect("api/user/delete",id, Request.Method.POST);
         super.onDestroy();
         Log.d("Log","id"+spf.getString("id",null));
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_all_rooms:
+                Intent i = new Intent(MainActivity.this,ShowAllRooms.class);
+                startActivity(i);
+                break;
+        }
     }
 }

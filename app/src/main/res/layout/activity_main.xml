@@ -31,6 +31,14 @@
         android:layout_below="@id/btn_add"
         android:onClick="delete"
         />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_all_rooms"
+        android:text="All romms"
+        android:layout_below="@id/btn_go_to_rooms"
+        android:onClick="delete"
+        />
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
