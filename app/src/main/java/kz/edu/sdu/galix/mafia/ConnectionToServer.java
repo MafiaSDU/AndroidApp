@@ -21,37 +21,31 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Рауан on 01.12.2016.
- */
-
 public class ConnectionToServer {
-    String url ="https://rauan-android-backend.herokuapp.com";
+    String url ="https://rauan-android-backend.herokuapp.com/";
     Context context;
     String response = "";
-    String resp,id;
+    String resp, id;
     SharedPreferences spf ;
     private RequestQueue mRequestQueue;
     private DiskBasedCache mCache;
-    ConnectionToServer(Context context){
+    ConnectionToServer(Context context, SharedPreferences spf){
         this.context = context;
     }
-    public void Connect(final String urlPath, final HashMap<String, String> params) {
-
+    public void Connect(final String urlPath, final HashMap<String, String> params, int method) {
 
         mRequestQueue = VolleySingleton.getInstance(context.getApplicationContext()).getRequestQueue
                 (context.getApplicationContext());
 
         StringRequest request = new StringRequest(
-                Request.Method.POST,
+                method,
                 url + urlPath,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Log.d("MyLogs", "Response is: "+ response);
                         resp = response;
-                        if(urlPath=="api/user/add"){
-
+                        if(urlPath.equals("api/user/add")){
                             try {
                                 JSONObject json = new JSONObject(response);
                                 Log.d("MyLogs",json.getString("_id"));
@@ -63,7 +57,6 @@ public class ConnectionToServer {
                                 e.printStackTrace();
                             }
                         }
-
                     }
                 },
                 new Response.ErrorListener(){

@@ -2,6 +2,7 @@ package kz.edu.sdu.galix.mafia;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,7 +28,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
     String url ="https://rauan-android-backend.herokuapp.com/";
     EditText ed_name;
-
+    ConnectionToServer connection;
     Button start,go_to_rooms;
     ProgressBar pb;
     SharedPreferences spf;
@@ -41,11 +42,17 @@ public class MainActivity extends AppCompatActivity {
         ed_name = (EditText)findViewById(R.id.name);
         pb = (ProgressBar)findViewById(R.id.pb1);
         spf = getSharedPreferences("id",MODE_PRIVATE);
+        connection = new ConnectionToServer(this, spf);
+
+        Intent i = new Intent(MainActivity.this,ShowAllRooms.class);
+        startActivity(i);
     }
+
+
     public void add(View v){
         HashMap<String,String> user = new HashMap<>();
         user.put("name", ed_name.getText().toString());
-        Connect("api/user/add",user);
+        connection.Connect("api/user/add",user, Request.Method.POST);
         pb.setVisibility(View.VISIBLE);
         ed_name.setText("");
         start.setEnabled(false);
@@ -56,14 +63,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         HashMap<String,String> id = new HashMap<>();
         id.put("id",spf.getString("id",null));
         SharedPreferences.Editor editor = spf.edit();
         editor.remove("id");
         editor.commit();
-        Connect("api/user/delete",id);
+        connection.Connect("api/user/delete",id, Request.Method.POST);
+        super.onDestroy();
     }
-
-
 }

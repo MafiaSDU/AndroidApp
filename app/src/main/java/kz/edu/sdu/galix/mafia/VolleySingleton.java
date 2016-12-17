@@ -1,6 +1,7 @@
 package kz.edu.sdu.galix.mafia;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -26,6 +27,7 @@ public class VolleySingleton {
             mRequestQueue = Volley.newRequestQueue(context);
             
         }
+        Log.d("MyLogs", mRequestQueue.toString());
         return mRequestQueue;
     }
 }
