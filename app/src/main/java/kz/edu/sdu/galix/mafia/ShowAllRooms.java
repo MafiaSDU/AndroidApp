@@ -63,6 +63,10 @@ public class ShowAllRooms extends AppCompatActivity {
                 TextView v = (TextView) view.findViewById(R.id.roomName);
                 count++;
                 Log.d("MyLogs", v.getHint().toString());
+                Intent i = new Intent(ShowAllRooms.this, infoAboutRoom.class);
+                i.putExtra("roomId", v.getHint().toString());
+                i.putExtra("roomName", v.getText().toString());
+                startActivity(i);
             }
         });
     }
