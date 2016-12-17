@@ -70,18 +70,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         Log.d("Log","Destroyed");
         HashMap<String,String> id = new HashMap<>();
         id.put("id",spf.getString("id",null));
+        HashMap<String,String> room_id = new HashMap<>();
+        room_id.put("room_id","58550ec0efa1910004377636");
         editor = spf.edit();
         Log.d("Log","id"+spf.getString("id",null));
         editor.remove("id");
         editor.remove("name");
         editor.commit();
         connection.Connect("api/user/delete",id, Request.Method.POST);
-        super.onDestroy();
+        connection.Connect("api/room/"+spf.getString("room_id",null),room_id,Request.Method.DELETE);
         Log.d("Log","id"+spf.getString("id",null));
+        super.onDestroy();
     }
 
     @Override
