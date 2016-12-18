@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RoomsActivity extends AppCompatActivity {
-
     EditText room_name,mafias,citizens,doctors,sheriff;
     SharedPreferences spf;
     TextView user_name;
@@ -49,7 +48,8 @@ public class RoomsActivity extends AppCompatActivity {
         room.put("doctor",doctors.getText().toString());
         room.put("citizen",citizens.getText().toString());
         room.put("name",room_name.getText().toString());
-        room.put("creator",spf.getString("id",null));
+        room.put("creator",spf.getString("user_id",null));
+        Log.d("MyLogs", "create_room");
         connect.Connect("api/room/add",room, Request.Method.POST);
     }
     public void createList(){
@@ -57,7 +57,5 @@ public class RoomsActivity extends AppCompatActivity {
             numbers[i]=""+i;
             Log.d("MyLogs",numbers[i]+"");
         }
-
     }
-
 }

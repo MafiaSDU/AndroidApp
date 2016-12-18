@@ -26,6 +26,7 @@ public class ConnectionToServer {
     Context context;
     String response = "";
     String resp, id;
+    String URL = "";
     SharedPreferences spf ;
     private RequestQueue mRequestQueue;
     private DiskBasedCache mCache;
@@ -35,6 +36,7 @@ public class ConnectionToServer {
     }
     public void Connect(final String urlPath, final HashMap<String, String> params, int method) {
 
+        URL = urlPath;
         mRequestQueue = VolleySingleton.getInstance(context.getApplicationContext()).getRequestQueue
                 (context.getApplicationContext());
 
@@ -74,7 +76,7 @@ public class ConnectionToServer {
                 new Response.ErrorListener(){
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("MyLogs", error.toString());
+                        Log.d("MyLogs", URL + " - " + error.toString());
                     }
                 }){
             protected HashMap<String, String> getParams() throws AuthFailureError {
