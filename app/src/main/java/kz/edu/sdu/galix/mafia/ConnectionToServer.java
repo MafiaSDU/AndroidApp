@@ -57,7 +57,7 @@ public class ConnectionToServer {
                                 e.printStackTrace();
                             }
                         }
-                        if(urlPath=="api/room/add"){
+                        if(urlPath.equals("api/room/add")){
                             try {
                                 JSONObject json = new JSONObject(response);
                                 Log.d("MyLogs",response);

@@ -36,8 +36,9 @@ public class infoAboutRoom extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_about_room);
+        spf = getSharedPreferences("data", MODE_PRIVATE);
         connection = new ConnectionToServer(this, spf);
-        spf = getSharedPreferences("data",MODE_PRIVATE);
+        Log.d("MyLogs", "infoAboutRoom " + spf.getString("room_id", ""));
 
         btn_connect_to_room = (Button)findViewById(R.id.btnConnectToRoom);
         btn_go_to_chat = (Button) findViewById(R.id.btnGoToChat);
@@ -59,7 +60,7 @@ public class infoAboutRoom extends AppCompatActivity implements View.OnClickList
         Intent i = getIntent();
         roomId = i.getStringExtra("roomId");
         roomName.setText(i.getStringExtra("roomName"));
-        Log.d("MyLogs", "infoAboutRoom " + spf.getString("room_id", ""));
+
         if(spf.getString("room_id", "").equals(roomId)) {
             btn_connect_to_room.setVisibility(View.GONE);
             btn_go_to_chat.setVisibility(View.VISIBLE);
@@ -73,9 +74,10 @@ public class infoAboutRoom extends AppCompatActivity implements View.OnClickList
             case R.id.btnConnectToRoom:
                 new MyTask2().execute("api/room/addUser");
                 break;
-//            case R.id.btn_go_to_chat:
-//
-//                break;
+            case R.id.btnGoToChat:
+                Intent i = new Intent(infoAboutRoom.this, GroupChat.class);
+                startActivity(i);
+                break;
         }
     }
 
@@ -109,7 +111,7 @@ public class infoAboutRoom extends AppCompatActivity implements View.OnClickList
 
         @Override
         protected void onPostExecute(String data) {
-            Log.d("MyLogs", "data - " + data + "     ---" + URL+ " : " + ("api/room/" + roomId));
+            Log.d("MyLogs", "data - " + data + "    ---" + URL + " : " + ("api/room/" + roomId));
             try {
                 if(URL.equals(("api/room/" + roomId))) {
                     room = new JSONObject(data);
@@ -127,16 +129,15 @@ public class infoAboutRoom extends AppCompatActivity implements View.OnClickList
                     btn_go_to_chat.setVisibility(View.VISIBLE);
                     SharedPreferences.Editor edit = spf.edit();
                     edit.remove("room_id");
-                    edit.putString("room_id", room.getString("_id"));
+                    edit.putString("room_id", roomId);
+                    edit.commit();
                     Log.d("MyLogs", "getString" + room.getString("_id"));
-                    Toast.makeText(infoAboutRoom.this,"Success " , Toast.LENGTH_LONG).show();
+                    Toast.makeText(infoAboutRoom.this,"Success" , Toast.LENGTH_LONG).show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             super.onPostExecute(data);
         }
-
-
     }
 }

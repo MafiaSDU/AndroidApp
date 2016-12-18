@@ -38,7 +38,7 @@ public class ShowAllRooms extends AppCompatActivity {
 
         connection = new ConnectionToServer(this, spf);
         spf = getSharedPreferences("data",MODE_PRIVATE);
-        Log.d("MyLogs", "MainActivity " + spf.getString("room_id", ""));
+        Log.d("MyLogs", "ShowAllRooms " + spf.getString("room_id", ""));
         tv = (TextView) findViewById(R.id.tv);
         progressBarShowAllRooms = (ProgressBar) findViewById(R.id.progressBarShowAllRooms);
         listView = (ListView)findViewById(R.id.listView);
@@ -66,7 +66,6 @@ public class ShowAllRooms extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView v = (TextView) view.findViewById(R.id.roomName);
                 count++;
-                Log.d("MyLogs", v.getHint().toString());
                 Intent i = new Intent(ShowAllRooms.this, infoAboutRoom.class);
                 i.putExtra("roomId", v.getHint().toString());
                 i.putExtra("roomName", v.getText().toString());
@@ -93,13 +92,12 @@ public class ShowAllRooms extends AppCompatActivity {
         protected void onPostExecute(String allRooms) {
             try {
                 JSONArray rooms = new JSONArray(allRooms);
-                Log.d("MyLogs", "Response is: "+ rooms.length() + " --- " +  allRooms);
-                Log.d("MyLogs", "--------------------------------------------------");
+//                Log.d("MyLogs", "Response is: "+ rooms.length() + " --- " +  allRooms);
+//                Log.d("MyLogs", "--------------------------------------------------");
                 for(int i = 0; i < rooms.length(); i++) {
                     JSONObject room = new JSONObject("" + rooms.get(i));
-                    Log.d("MyLogs", "room ---" + room.toString());
                     JSONObject creator = new JSONObject("" + room.get("creator"));
-                    Log.d("MyLogs", "Room -  " + room.get("name") + " - " + creator.get("name") + " - " +  room.get("count") + " / " +  room.get("number"));
+                    Log.d("MyLogs", "Room -  " + room.get("name") + " - " +room.get("name") + " - " + creator.get("name") + " - " +  room.get("count") + " / " +  room.get("number"));
                     HashMap<String, String> map;
                     map = new HashMap<>();
                     map.put("roomName", room.get("name").toString() + "`" + room.get("_id").toString());
@@ -109,7 +107,6 @@ public class ShowAllRooms extends AppCompatActivity {
                     adapter.notifyDataSetChanged();
                 }
                 progressBarShowAllRooms.setVisibility(View.GONE);
-                Log.d("MyLogs", "Dsdsa");
             } catch (JSONException e) {
                 e.printStackTrace();
             }

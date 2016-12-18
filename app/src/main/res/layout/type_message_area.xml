@@ -12,12 +12,14 @@
         android:textColorHint="#CFD8DC"
         android:textColor="#CFD8DC"
         android:layout_weight="1"
+        android:id="@+id/userMessage"
         android:hint="Write a message" />
 
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-
+        android:id="@+id/sendMessage"
+        android:clickable="true"
         android:padding="4dp"
         android:src="@android:drawable/ic_menu_send" />
 
