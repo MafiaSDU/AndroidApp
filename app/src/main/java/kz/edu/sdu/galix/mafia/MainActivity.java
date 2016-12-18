@@ -44,12 +44,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         go_to_rooms = (Button)findViewById(R.id.btn_go_to_rooms);
         go_to_rooms.setVisibility(View.INVISIBLE);
+        go_to_rooms.setOnClickListener(this);
         ed_name = (EditText)findViewById(R.id.name);
         pb = (ProgressBar)findViewById(R.id.pb1);
         spf = getSharedPreferences("data",MODE_PRIVATE);
         connection = new ConnectionToServer(this, spf);
+        Log.d("MyLogs", "MainActivity " + spf.getString("room_id", ""));
 
-        Intent i = new Intent(MainActivity.this,GroupChat.class);
+        Intent i = new Intent(MainActivity.this,ShowAllRooms.class);
         startActivity(i);
     }
 
@@ -72,16 +74,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onDestroy() {
         Log.d("Log","Destroyed");
         HashMap<String,String> id = new HashMap<>();
-        id.put("id",spf.getString("id",null));
+        id.put("user_id",spf.getString("id",null));
         HashMap<String,String> room_id = new HashMap<>();
-        room_id.put("room_id","58550ec0efa1910004377636");
+        room_id.put("room_id",spf.getString("room_id",null));
         editor = spf.edit();
         Log.d("Log","id"+spf.getString("id",null));
-        editor.remove("id");
-        editor.remove("name");
-        editor.commit();
         connection.Connect("api/user/delete",id, Request.Method.POST);
-        connection.Connect("api/room/"+spf.getString("room_id",null),room_id,Request.Method.DELETE);
+        connection.Connect("api/room/"+spf.getString("room_id", null), room_id, Request.Method.DELETE);
+        editor.remove("user_id");
+        editor.remove("user_name");
+        editor.remove("room_id");
+        editor.commit();
         Log.d("Log","id"+spf.getString("id",null));
         super.onDestroy();
     }
@@ -93,6 +96,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent i = new Intent(MainActivity.this,ShowAllRooms.class);
                 startActivity(i);
                 break;
+//            case R.id.go_to_rooms:
+//                Intent i1 = new Intent(MainActivity.this,ShowAllRooms.class);
+//                startActivity(i1);
+//                break;
         }
     }
 }

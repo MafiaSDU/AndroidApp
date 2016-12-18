@@ -50,7 +50,7 @@ public class ConnectionToServer {
                                 JSONObject json = new JSONObject(response);
                                 Log.d("MyLogs",json.getString("_id"));
                                 SharedPreferences.Editor editor = spf.edit();
-                                editor.putString("id",json.getString("_id"));
+                                editor.putString("user_id",json.getString("_id"));
                                 editor.commit();
 
                             } catch (JSONException e) {
@@ -58,7 +58,6 @@ public class ConnectionToServer {
                             }
                         }
                         if(urlPath=="api/room/add"){
-
                             try {
                                 JSONObject json = new JSONObject(response);
                                 Log.d("MyLogs",response);

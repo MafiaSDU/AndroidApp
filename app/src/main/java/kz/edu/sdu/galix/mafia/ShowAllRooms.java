@@ -37,6 +37,8 @@ public class ShowAllRooms extends AppCompatActivity {
         setContentView(R.layout.activity_show_all_rooms);
 
         connection = new ConnectionToServer(this, spf);
+        spf = getSharedPreferences("data",MODE_PRIVATE);
+        Log.d("MyLogs", "MainActivity " + spf.getString("room_id", ""));
         tv = (TextView) findViewById(R.id.tv);
         progressBarShowAllRooms = (ProgressBar) findViewById(R.id.progressBarShowAllRooms);
         listView = (ListView)findViewById(R.id.listView);
