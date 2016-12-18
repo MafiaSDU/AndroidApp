@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         spf = getSharedPreferences("data",MODE_PRIVATE);
         connection = new ConnectionToServer(this, spf);
 
-//        Intent i = new Intent(MainActivity.this,ShowAllRooms.class);
-//        startActivity(i);
+        Intent i = new Intent(MainActivity.this,GroupChat.class);
+        startActivity(i);
     }
 
 

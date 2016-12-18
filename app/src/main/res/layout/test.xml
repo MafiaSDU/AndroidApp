@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@drawable/rounded_corner">
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
             android:id="@+id/roomName"
             android:text="GleasonK"
-            android:textColor="@color/pn_blue"
-            android:textSize="22sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -29,7 +31,7 @@
         <TextView
             android:id="@+id/number"
             android:text="7:45pm"
-            android:textColor="@color/pn_red"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="12sp"
             android:layout_width="wrap_content"
             android:layout_alignParentRight="true"
@@ -38,13 +40,10 @@
             android:layout_height="wrap_content" />
 
     </RelativeLayout>
-
-
     <TextView
         android:id="@+id/creatorName"
-        android:text="@string/hello_world"
+        android:text="Каждый веб-разработчик знает"
         android:textSize="15sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
 </LinearLayout>

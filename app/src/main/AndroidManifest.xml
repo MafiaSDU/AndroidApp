@@ -22,7 +22,8 @@
             android:label="@string/title_activity_rooms"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ShowAllRooms" />
-        <activity android:name=".infoAboutRoom"></activity>
+        <activity android:name=".infoAboutRoom" />
+        <activity android:name=".GroupChat"></activity>
     </application>
 
 </manifest>
