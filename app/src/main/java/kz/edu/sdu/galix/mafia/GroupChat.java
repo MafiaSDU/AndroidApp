@@ -1,6 +1,7 @@
 package kz.edu.sdu.galix.mafia;
 
 import android.app.DownloadManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -44,6 +45,8 @@ public class GroupChat extends AppCompatActivity {
         groupChat = (LinearLayout) findViewById(R.id.groupChat);
         userMessage = (EditText) findViewById(R.id.userMessage);
         sendMessage = (ImageView) findViewById(R.id.sendMessage);
+        Intent i = getIntent();
+        setTitle(i.getStringExtra("roomName"));
 //        for(int i = 0; i < 10; i++) {
             new GetMessage().execute();
 //        }

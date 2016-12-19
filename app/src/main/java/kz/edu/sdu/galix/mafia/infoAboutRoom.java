@@ -76,6 +76,7 @@ public class infoAboutRoom extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btnGoToChat:
                 Intent i = new Intent(infoAboutRoom.this, GroupChat.class);
+                i.putExtra("roomName",roomName.getText());
                 startActivity(i);
                 break;
         }
