@@ -24,7 +24,7 @@
 
         android:layout_height="wrap_content"
         android:id="@+id/btn_all_rooms"
-        android:text="All romms"
+        android:text="All rooms"
         android:onClick="delete"
         android:layout_marginTop="14dp"
         android:layout_below="@+id/btn_go_to_rooms"
@@ -34,8 +34,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:id="@+id/btn_go_to_rooms"
-        android:text="Go to rooms"
-
+        android:text="Create room"
         android:onClick="delete"
         android:layout_marginTop="20dp"
         android:layout_alignLeft="@+id/btn_all_rooms"
