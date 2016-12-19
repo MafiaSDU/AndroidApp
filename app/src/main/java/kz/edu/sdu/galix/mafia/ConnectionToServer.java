@@ -35,11 +35,9 @@ public class ConnectionToServer {
         this.spf = spf;
     }
     public void Connect(final String urlPath, final HashMap<String, String> params, int method) {
-
         URL = urlPath;
         mRequestQueue = VolleySingleton.getInstance(context.getApplicationContext()).getRequestQueue
                 (context.getApplicationContext());
-
         StringRequest request = new StringRequest(
                 method,
                 url + urlPath,
