@@ -31,14 +31,13 @@ public class RoomsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rooms);
+        setTitle("All rooms");
         mafias = (EditText) findViewById(R.id.mafia);
         citizens = (EditText) findViewById(R.id.citizens);
         doctors = (EditText) findViewById(R.id.doctors);
         sheriff = (EditText) findViewById(R.id.sheriff);
         room_name = (EditText)findViewById(R.id.room_name);
         spf = getSharedPreferences("data",MODE_PRIVATE);
-        user_name = (TextView)findViewById(R.id.creator_name);
-        user_name.setText(spf.getString("name",null));
         connect = new ConnectionToServer(this,spf);
     }
     public void create_room(View v){
@@ -51,11 +50,7 @@ public class RoomsActivity extends AppCompatActivity {
         room.put("creator",spf.getString("user_id",null));
         Log.d("MyLogs", "create_room");
         connect.Connect("api/room/add",room, Request.Method.POST);
-    }
-    public void createList(){
-        for(int i=1;i<=10;i++){
-            numbers[i]=""+i;
-            Log.d("MyLogs",numbers[i]+"");
-        }
+        Intent intent = new Intent(RoomsActivity.this, ShowAllRooms.class);
+        startActivity(intent);
     }
 }

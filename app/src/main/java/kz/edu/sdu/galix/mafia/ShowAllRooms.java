@@ -35,22 +35,13 @@ public class ShowAllRooms extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_all_rooms);
-
+        setTitle("All rooms");
         connection = new ConnectionToServer(this, spf);
         spf = getSharedPreferences("data",MODE_PRIVATE);
-        Log.d("MyLogs", "ShowAllRooms " + spf.getString("room_id", ""));
         tv = (TextView) findViewById(R.id.tv);
         progressBarShowAllRooms = (ProgressBar) findViewById(R.id.progressBarShowAllRooms);
         listView = (ListView)findViewById(R.id.listView);
         data = new ArrayList<>();
-//                HashMap<String, String> map;
-//                for(int i = 0; i < 10; i++) {
-//                    map = new HashMap<>();
-//                    map.put("roomName", "Room2` " + (i + 1));
-//                    map.put("creatorName", "Creator Name2  " + (i + 1));
-//                    map.put("number", (i + 1) + " / 20");
-//                    data.add(map);
-//                }
         adapter = new MySimpleAdapter(
             this,
             data,
