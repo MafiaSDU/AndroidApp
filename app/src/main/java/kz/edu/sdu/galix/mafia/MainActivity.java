@@ -28,9 +28,9 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     String url ="https://rauan-android-backend.herokuapp.com/";
-    EditText ed_name;
+
     ConnectionToServer connection;
-    Button start,go_to_rooms, btn_all_rooms;
+    Button create_rooms, btn_all_rooms;
     ProgressBar pb;
     SharedPreferences spf;
     SharedPreferences.Editor editor;
@@ -38,36 +38,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        start = (Button)findViewById(R.id.btn_add);
+
         btn_all_rooms = (Button) findViewById(R.id.btn_all_rooms);
         btn_all_rooms.setOnClickListener(this);
 
-        go_to_rooms = (Button)findViewById(R.id.btn_go_to_rooms);
-        go_to_rooms.setVisibility(View.INVISIBLE);
-        go_to_rooms.setOnClickListener(this);
-        ed_name = (EditText)findViewById(R.id.name);
+        create_rooms = (Button)findViewById(R.id.create_room);
+        create_rooms.setOnClickListener(this);
+
         pb = (ProgressBar)findViewById(R.id.pb1);
         spf = getSharedPreferences("data",MODE_PRIVATE);
         connection = new ConnectionToServer(this, spf);
         Log.d("MyLogs", "MainActivity " + spf.getString("room_id", ""));
-
-        Intent i = new Intent(MainActivity.this,ShowAllRooms.class);
-//        startActivity(i);
     }
 
-
-    public void add(View v){
-        HashMap<String,String> user = new HashMap<>();
-        user.put("name", ed_name.getText().toString());
-        connection.Connect("api/user/add",user, Request.Method.POST);
-        pb.setVisibility(View.VISIBLE);
-
-        ed_name.setText("");
-        start.setEnabled(false);
-        go_to_rooms.setVisibility(View.VISIBLE);
-        Intent i = new Intent(MainActivity.this,RoomsActivity.class);
-        startActivity(i);
-    }
 
     @Override
     protected void onResume() {
@@ -103,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent i = new Intent(MainActivity.this,ShowAllRooms.class);
                 startActivity(i);
                 break;
-            case R.id.btn_go_to_rooms:
+            case R.id.create_room:
                 Intent i1 = new Intent(MainActivity.this,RoomsActivity.class);
                 startActivity(i1);
                 break;
