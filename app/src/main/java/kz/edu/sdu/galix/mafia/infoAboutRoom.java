@@ -92,6 +92,9 @@ public class infoAboutRoom extends AppCompatActivity implements View.OnClickList
                 map.put("userId", spf.getString("user_id", ""));
                 try {
                     map.put("count", "" + room.getInt("count"));
+                    SharedPreferences.Editor editor = spf.edit();
+                    editor.putString("count", "" + (Integer.parseInt("" + room.getInt("count")) + 1) + "");
+                    editor.commit();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

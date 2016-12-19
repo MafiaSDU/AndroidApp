@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("MyLogs", "MainActivity " + spf.getString("room_id", ""));
 
         Intent i = new Intent(MainActivity.this,ShowAllRooms.class);
-        startActivity(i);
+//        startActivity(i);
     }
 
 
@@ -61,8 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         user.put("name", ed_name.getText().toString());
         connection.Connect("api/user/add",user, Request.Method.POST);
         pb.setVisibility(View.VISIBLE);
-        editor = spf.edit();
-        editor.putString("name",ed_name.getText().toString());
+
         ed_name.setText("");
         start.setEnabled(false);
         go_to_rooms.setVisibility(View.VISIBLE);
@@ -71,22 +70,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("MyLogs","onResume");
+    }
+
+    @Override
     protected void onDestroy() {
-        Log.d("Log","Destroyed");
-        HashMap<String,String> id = new HashMap<>();
-        id.put("user_id",spf.getString("id",null));
-        HashMap<String,String> room_id = new HashMap<>();
-        room_id.put("room_id",spf.getString("room_id",null));
+        super.onDestroy();
+        HashMap<String,String> data = new HashMap<>();
+        data.put("userId",spf.getString("user_id", ""));
+        Log.d("MyLogs","data "+data.toString());
+        connection.Connect("api/user/delete",data, Request.Method.POST);
+        data.put("room_id",spf.getString("room_id", ""));
+        data.put("count", spf.getString("count", "3"));
+        Log.d("MyLogs","id"+spf.getString("id",null));
+        Log.d("MyLogs","data "+data.toString());
+        connection.Connect("api/room/"+spf.getString("room_id", null), data, Request.Method.POST);
         editor = spf.edit();
-        Log.d("Log","id"+spf.getString("id",null));
-        connection.Connect("api/user/delete",id, Request.Method.POST);
-        connection.Connect("api/room/"+spf.getString("room_id", null), room_id, Request.Method.DELETE);
         editor.remove("user_id");
         editor.remove("user_name");
         editor.remove("room_id");
+        editor.remove("count");
         editor.commit();
-        Log.d("Log","id"+spf.getString("id",null));
-        super.onDestroy();
+        Log.d("MyLogs","Destroyed");
     }
 
     @Override
@@ -96,10 +103,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent i = new Intent(MainActivity.this,ShowAllRooms.class);
                 startActivity(i);
                 break;
-//            case R.id.go_to_rooms:
-//                Intent i1 = new Intent(MainActivity.this,ShowAllRooms.class);
-//                startActivity(i1);
-//                break;
+            case R.id.btn_go_to_rooms:
+                Intent i1 = new Intent(MainActivity.this,RoomsActivity.class);
+                startActivity(i1);
+                break;
         }
     }
 }

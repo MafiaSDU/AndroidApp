@@ -21,6 +21,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 public class GroupChat extends AppCompatActivity {
@@ -29,7 +31,7 @@ public class GroupChat extends AppCompatActivity {
     ImageView sendMessage;
     ConnectionToServer connection;
     SharedPreferences spf;
-    String ROOM_ID, USER_ID;
+    String ROOM_ID, USER_ID, USER_NAME;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,7 @@ public class GroupChat extends AppCompatActivity {
         connection = new ConnectionToServer(this, spf);
         ROOM_ID = spf.getString("room_id", "");
         USER_ID = spf.getString("user_id", "");
+        USER_NAME = spf.getString("user_name", "");
         groupChat = (LinearLayout) findViewById(R.id.groupChat);
         userMessage = (EditText) findViewById(R.id.userMessage);
         sendMessage = (ImageView) findViewById(R.id.sendMessage);
@@ -53,6 +56,7 @@ public class GroupChat extends AppCompatActivity {
                 map.put("message", message);
                 map.put("roomId", ROOM_ID);
                 map.put("userId", USER_ID);
+                map.put("userName", USER_NAME);
                 connection.Connect("api/chat/add", map, Request.Method.POST);
 
                 userMessage.setText("");
@@ -82,20 +86,27 @@ public class GroupChat extends AppCompatActivity {
                 LinearLayout.LayoutParams rlp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 10);
                 for(int i = 0; i < messages.length(); i++) {
                     JSONObject message = new JSONObject("" + messages.get(i));
-                    JSONObject user = new JSONObject("" + message.getString("user"));
-                    Log.d("MyLogs", "message - " +   message.getString("message") + " " + message.getString("user"));
+//                    JSONObject user = new JSONObject("" + message.getString("user"));
+                    Log.d("MyLogs", "message - " +   messages);
                     TextView textView = new TextView(GroupChat.this);
                     LayoutInflater inflater = getLayoutInflater();
                     int layout = R.layout.chat_item_left;
-                    if(user.getString("_id").equals(USER_ID)) {
+                    if(message.getString("userId").equals(USER_ID)) {
                         layout = R.layout.chat_item_right;
                     }
 
                     View view = inflater.inflate(layout, groupChat, false);
+
+//                    Date date = new Date(message.getInt("date"));
+//                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
+                    Log.d("MyLogs", "date - " +   message.getString("date"));
+
                     TextView chat_message = ((TextView)view.findViewById(R.id.chat_message));
                     TextView chat_user = ((TextView)view.findViewById(R.id.chat_user));
+                    TextView chat_time = ((TextView)view.findViewById(R.id.chat_time));
+                    chat_time.setText(message.getString("date"));
                     chat_message.setText(message.getString("message"));
-                    chat_user.setText(user.getString("name"));
+                    chat_user.setText(message.getString("userName"));
                     LinearLayout ll = (LinearLayout)view.findViewById(R.id.chat_item_layout);
                     ll.setPadding(15,15,15,15);
                     groupChat.addView(view);

@@ -53,6 +53,7 @@ public class ConnectionToServer {
                                 Log.d("MyLogs",json.getString("_id"));
                                 SharedPreferences.Editor editor = spf.edit();
                                 editor.putString("user_id",json.getString("_id"));
+                                editor.putString("user_name",json.getString("name"));
                                 editor.commit();
 
                             } catch (JSONException e) {
