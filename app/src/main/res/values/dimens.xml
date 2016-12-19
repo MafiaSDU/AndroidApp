@@ -5,5 +5,4 @@
     <dimen name="ed_Name_size">20sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="_24sp">24sp</dimen>
-    <dimen name="_6dp">6dp</dimen>
 </resources>

@@ -2,8 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_info_about_room"
+    android:background="@drawable/room"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -170,11 +172,12 @@
     </LinearLayout>
     <Button
         android:text="connect"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/LLInfoAboutRoom"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+
         android:layout_marginTop="9dp"
         android:id="@+id/btnConnectToRoom" />
 
@@ -188,9 +191,10 @@
 
     <Button
         android:text="go to chat"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnGoToChat"
+
         android:layout_below="@+id/btnConnectToRoom" />
 
 

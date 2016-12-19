@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_all_rooms = (Button) findViewById(R.id.btn_all_rooms);
         btn_all_rooms.setOnClickListener(this);
 
-        create_rooms = (Button)findViewById(R.id.create_room);
+        create_rooms = (Button)findViewById(R.id.btn_go_to_rooms);
         create_rooms.setOnClickListener(this);
 
         pb = (ProgressBar)findViewById(R.id.pb1);
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent i = new Intent(MainActivity.this,ShowAllRooms.class);
                 startActivity(i);
                 break;
-            case R.id.create_room:
+            case R.id.btn_go_to_rooms:
                 Intent i1 = new Intent(MainActivity.this,RoomsActivity.class);
                 startActivity(i1);
                 break;
