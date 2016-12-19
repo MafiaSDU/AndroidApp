@@ -23,7 +23,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ShowAllRooms" />
         <activity android:name=".infoAboutRoom" />
-        <activity android:name=".GroupChat"></activity>
+        <activity android:name=".GroupChat" />
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>

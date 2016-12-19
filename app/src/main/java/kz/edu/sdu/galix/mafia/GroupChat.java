@@ -49,6 +49,9 @@ public class GroupChat extends AppCompatActivity {
         setTitle(i.getStringExtra("roomName"));
         Log.d("MyLogs", "roomName " +i.getStringExtra("roomName"));
         new GetMessage().execute();
+//        for(int i = 0; i < 10; i++) {
+            new GetMessage().execute();
+//        }
         sendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
